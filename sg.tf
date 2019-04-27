@@ -54,3 +54,16 @@ resource "aws_security_group" "allow_http" {
     Name = "allow_http"
   }
 }
+
+resource "aws_security_group" "allow_icmp" {
+  name        = "allow_icmp"
+  description = "Allow ICMP"
+  vpc_id      = "${aws_vpc.main.id}"
+
+  ingress {
+    from_port   = 8
+    to_port     = 0
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
